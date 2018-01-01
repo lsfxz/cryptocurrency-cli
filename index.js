@@ -1,7 +1,11 @@
 #! /usr/bin/env node
 
+const supportsColor = require('supports-color');
 const request = require('request');
-const chalk = require('chalk');
+const ctx = require('chalk');
+const chalk = new ctx.constructor({level: 3});
+// const blue = chalk.hex('#5cadff')
+// const green = chalk.hex('#5add60')
 const Table = require('cli-table');
 const figlet = require('figlet');
 const Barcli = require("barcli");
@@ -40,34 +44,34 @@ const requestUrl = 'https://api.coinmarketcap.com/v1/ticker/?convert=' + curUp +
 request(requestUrl, function (error, response, body) {
   var data = JSON.parse(body);
   var table = new Table({ head: [
-    chalk.blue('Rank'),
-    chalk.blue('Coin'),
-    chalk.blue(`${curUp} Price`),
-    chalk.blue('Coins Owned'),
-    chalk.blue('Net Worth'),
-    chalk.blue('24 Hour Volume'),
-    chalk.blue('Market Cap'),
-    chalk.blue('1 Hour'),
-    chalk.blue('24 Hours'),
-    chalk.blue('7 Days'),
-    chalk.blue('Last Updated'),
+    chalk.keyword('skyblue')('Rank'),
+    chalk.keyword('skyblue')('Coin'),
+    chalk.keyword('skyblue')(`${curUp} Price`),
+    chalk.keyword('skyblue')('Coins Owned'),
+    chalk.keyword('skyblue')('Net Worth'),
+    chalk.keyword('skyblue')('24 Hour Volume'),
+    chalk.keyword('skyblue')('Market Cap'),
+    chalk.keyword('skyblue')('1 Hour'),
+    chalk.keyword('skyblue')('24 Hours'),
+    chalk.keyword('skyblue')('7 Days'),
+    chalk.keyword('skyblue')('Last Updated'),
   ] });
   var portfolioTotal = 0;
   var barData = {};
   data.forEach(function (value, key) {
     if(portfolio.hasOwnProperty(value.id)) {
       table.push([
-        chalk.blue(value.rank),
-        chalk.green(value.id),
-        chalk.green(curSym+addCommas(value['price_'+curLow])),
-        chalk.green(addCommas(portfolio[value.id])),
-        chalk.green(curSym+addCommas(Number(Math.round(value['price_'+curLow] * portfolio[value.id])))),
-        chalk.green(curSym+addCommas(addZeroes(value['24h_volume_'+curLow]))),
-        chalk.green(curSym+addCommas(addZeroes(value['market_cap_'+curLow]))),
-        chalk.green(`${value.percent_change_1h}%`),
-        chalk.green(`${value.percent_change_24h}%`),
-        chalk.green(`${value.percent_change_7d}%`),
-        chalk.green(timeSince(new Date(value.last_updated * 1000)) + ' ago'),
+        chalk.keyword('skyblue')(value.rank),
+        chalk.keyword('darkseagreen')(value.id),
+        chalk.keyword('darkseagreen')(curSym+addCommas(value['price_'+curLow])),
+        chalk.keyword('darkseagreen')(addCommas(portfolio[value.id])),
+        chalk.keyword('darkseagreen')(curSym+addCommas(Number(Math.round(value['price_'+curLow] * portfolio[value.id])))),
+        chalk.keyword('darkseagreen')(curSym+addCommas(addZeroes(value['24h_volume_'+curLow]))),
+        chalk.keyword('darkseagreen')(curSym+addCommas(addZeroes(value['market_cap_'+curLow]))),
+        chalk.keyword('darkseagreen')(`${value.percent_change_1h}%`),
+        chalk.keyword('darkseagreen')(`${value.percent_change_24h}%`),
+        chalk.keyword('darkseagreen')(`${value.percent_change_7d}%`),
+        chalk.keyword('darkseagreen')(timeSince(new Date(value.last_updated * 1000)) + ' ago'),
       ]);
       var totalValue = Number(Math.round(value['price_'+curLow] * portfolio[value.id]));
       var coinName = value.id;
@@ -77,7 +81,7 @@ request(requestUrl, function (error, response, body) {
   });
   barGraph(barData, portfolioTotal);
   console.log('\n'+table.toString());
-  console.log(chalk.underline.blue(`Portfolio Total: ${curSym}${portfolioTotal}`));
+  console.log(chalk.keyword('skyblue').underline(`Portfolio Total: ${curSym}${portfolioTotal}`));
   console.log(' ');
 });
 
