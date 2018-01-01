@@ -10,8 +10,8 @@
   "author": "n053",
   "license": "MIT",
   "dependencies": {
-    "barcli": "lsfxz/barcli",
-    "chalk": "lsfxz/chalk",
+    "barcli": "git+https://github.com/lsfxz/barcli.git",
+    "chalk": "git+https://github.com/lsfxz/chalk.git",
     "cli-table": "^0.3.1",
     "commander": "^2.12.2",
     "currency-symbol-map": "^4.0.3",
