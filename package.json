@@ -11,7 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "barcli": "git://github.com/lsfxz/barcli",
-    "chalk": "git://github.com/lsfxz/chalk",
+    "chalk": "^2.2.0",
     "cli-table": "^0.3.1",
     "commander": "^2.12.2",
     "currency-symbol-map": "^4.0.3",
