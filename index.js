@@ -10,9 +10,22 @@ const Table = require('cli-table');
 const figlet = require('figlet');
 const Barcli = require("barcli");
 const path = require('path');
+const fs = require('fs');
+const os = require('os');
 const program = require('commander');
 const getSymbolFromCurrency = require('currency-symbol-map');
-const portfolio = require(path.resolve(__dirname,'portfolio.json'));
+var portfolio;
+fs.exists(path.resolve(path.join(os.homedir(),'portfolio.json')), function (exists) {
+  if (exists)
+  {
+    portfolio = require(path.resolve(path.join(os.homedir(),'portfolio.json')));
+  }
+  else
+  {
+    portfolio = require(path.resolve(__dirname,'portfolio.json'));
+  }
+});
+
 
 /**
  * Command Line Options
